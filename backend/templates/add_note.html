@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Secure Note</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#0a0a0a] text-zinc-100 min-h-screen">
+<div class="max-w-md mx-auto p-6">
+
+    <h1 class="text-2xl font-bold mb-6">Add Secure Note</h1>
+
+    {% if error %}
+        <div class="bg-[#1a0a0a] text-red-400 border border-[#451a1a] p-3 rounded mb-4 text-sm">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <form method="post" class="space-y-4">
+
+        <div>
+            <label class="label">Title</label>
+            <input name="title" required class="input">
+        </div>
+
+        <div>
+            <label class="label">Content</label>
+            <textarea
+                name="content"
+                rows="6"
+                required
+                class="input resize-none"
+            ></textarea>
+        </div>
+
+        <div>
+            <label class="label">Tags</label>
+            <input
+                name="tags"
+                placeholder="personal, important"
+                class="input"
+            >
+        </div>
+
+        <button type="submit" class="btn w-full">
+            Save Note
+        </button>
+    </form>
+    <a href="/dashboard" class="link mt-6 inline-block">
+        Back to Dashboard
+    </a>
+
+</div>
+
+<style>
+    .input {
+        width: 100%;
+        padding: 0.6rem;
+        border-radius: 0.4rem;
+        background: #1a1a1a;
+        border: 1px solid #333333;
+        color: #ffffff;
+        outline: none;
+    }
+
+    .label {
+        display: block;
+        margin-bottom: 0.35rem;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: #999999;
+        letter-spacing: 0.02rem;
+    }
+
+    .btn {
+        background: #ffffff;
+        color: #000000;
+        padding: 0.6rem;
+        border-radius: 0.4rem;
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+    }
+
+    .link {
+        color: #777777;
+        font-size: 0.875rem;
+        text-decoration: none;
+    }
+</style>
+</body>
+</html>

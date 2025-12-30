@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Password</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#0a0a0a] text-zinc-100 min-h-screen">
+<div class="max-w-md mx-auto p-6">
+    <h1 class="text-2xl font-bold mb-6">Add Password</h1>
+
+    {% if error %}
+        <div class="bg-[#1a0a0a] text-red-400 border border-[#451a1a] p-3 rounded mb-4 text-sm">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <a href="/generator" class="link mb-4 inline-block">
+         Open Password Generator
+    </a>
+
+    <form method="post" class="space-y-4 mt-4">
+
+        <div>
+            <label class="label">Site</label>
+            <input name="site" required class="input">
+        </div>
+
+        <div>
+            <label class="label">Username</label>
+            <input name="username" class="input">
+        </div>
+
+        <div>
+            <label class="label">Password</label>
+            <input type="password" name="password" required class="input">
+        </div>
+
+        <div>
+            <label class="label">Tags</label>
+            <input name="tags" placeholder="work, email" class="input">
+        </div>
+
+        <button type="submit" class="btn w-full">
+            Save Password
+        </button>
+    </form>
+
+    <a href="/dashboard" class="link mt-6 inline-block">
+        Back to Dashboard
+    </a>
+
+</div>
+
+<script>
+    const gen = sessionStorage.getItem("generatedPassword");
+    if (gen) {
+        document.querySelector('input[name="password"]').value = gen;
+        sessionStorage.removeItem("generatedPassword");
+    }
+</script>
+
+<style>
+    .input {
+        width: 100%;
+        padding: 0.7rem;
+        border-radius: 4px;
+        background: #121212;
+        border: 1px solid #2C2C2C;
+        color: #E0E0E0;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #888888;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .btn {
+        background: #FFFFFF;
+        color: #000000;
+        padding: 0.7rem;
+        border-radius: 4px;
+        border: none;
+        font-weight: 700;
+        cursor: pointer;
+        width: 100%;
+        transition: background 0.2s, opacity 0.2s;
+    }
+
+    .link {
+        color: #888888;
+        font-size: 0.8rem;
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+</style>
+
+</body>
+</html>

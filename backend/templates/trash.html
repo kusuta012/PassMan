@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trash</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#0a0a0a] text-zinc-100 min-h-screen">
+<div class="max-w-md mx-auto p-6">
+
+    <h1 class="text-2xl font-bold mb-6">Trash</h1>
+
+    <form method="post" action="/trash/clear" class="mb-6">
+        <button class="danger w-full">
+            Clear Trash
+        </button>
+    </form>
+
+    <div class="space-y-3">
+        {% for item in trash %}
+            {% if item.type == "note" %}
+                <div class="bg-[#161616] border border-[#262626] p-4 rounded flex justify-between items-center">
+                    <div>
+                        <div class="font-semibold"> {{ item.title }}</div>
+                        <div class="text-sm text-zinc-500">Secure Note</div>
+                    </div>
+
+                    <form method="post" action="/restore-note/{{ item.id }}">
+                        <button class="btn-sm">Restore</button>
+                    </form>
+                </div>
+            {% else %}
+                <div class="bg-[#161616] border border-[#262626] p-4 rounded flex justify-between items-center">
+                    <div>
+                        <div class="font-semibold">{{ item.site }}</div>
+                        <div class="text-sm text-zinc-500">
+                            {{ item.username }}
+                        </div>
+                    </div>
+
+                    <form method="post" action="/restore/{{ item.id }}">
+                        <button class="btn-sm">Restore</button>
+                    </form>
+                </div>
+            {% endif %}
+        {% else %}
+            <p class="text-zinc-500 text-center py-4">Trash is empy</p>
+        {% endfor %}
+    </div>
+
+    <a href="/dashboard" class="link mt-6 inline-block">
+        Back to Dashboard
+    </a>
+
+</div>
+
+<style>
+    .btn-sm {
+        background: #1a1a1a;
+        color: #ffffff;
+        border: 1px solid #333333;
+        padding: 0.4rem 0.7rem;
+        border-radius: 0.3rem;
+        font-size: 0.875rem;
+        cursor: pointer;
+    }
+
+    .link {
+        color: #707070;
+        font-size: 0.875rem;
+        text-decoration: none;
+    }
+
+    .danger {
+        background: #1a0a0a;
+        color: #ff5555;
+        border: 1px solid #451a1a;
+        padding: 0.6rem;
+        border-radius: 0.3rem;
+        font-weight: 600;
+        cursor: pointer;
+    }
+</style>
+</body>
+</html>

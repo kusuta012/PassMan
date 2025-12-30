@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vault</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#0a0a0a] text-zinc-100 min-h-screen">
+<div class="max-w-5xl mx-auto p-6">
+
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold">Vault Dashboard</h1>
+        <a href="/lock" class="text-zinc-500 hover:text-red-400">Lock</a>
+    </div>
+
+    <div class="flex flex-wrap gap-3 mb-6">
+        <a href="/add" class="btn">Add Password</a>
+        <a href="/add-note" class="btn">Add Note</a>
+        <a href="/generator" class="btn">generator</a>
+        <a href="/trash" class="btn">Trash</a>
+    </div>
+
+    <input
+        id="search"
+        placeholder="Search passwords or notes..."
+        oninput="filterEntries()"
+        class="w-full p-3 mb-8 rounded bg-[#161616] border border-[#262626] text-white focus:outline-none focus:border-zinc-500"
+    >
+
+    <h2 class="text-lg font-semibold mb-3">Passwords</h2>
+    <div class="space-y-3">
+        {% for e in entries %}
+        <div
+            class="entry bg-[#161616] border border-[#262626] p-4 rounded flex justify-between items-center"
+            data-site="{{ e.site | lower }}"
+            data-user="{{ e.username | lower }}"
+            data-tags="{{ ' '.join(e.tags) | lower }}"
+        >
+            <div>
+                <div class="font-semibold">{{ e.site }}</div>
+                <div class="text-sm text-zinc-500">{{ e.username }}</div>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <button onclick="copyPassword('{{ e.password }}')" class="btn-sm">
+                    Copy
+                </button>
+
+                <a href="/edit/{{ e.id }}" class="link">Edit</a>
+
+                <form method="post" action="/delete/{{ e.id }}">
+                    <button class="danger">Delete</button>
+                </form>
+
+                {% if e.totp.enabled %}
+                    <span id="totp-{{ e.id }}" class="text-emerald-500 text-sm"></span>
+                {% else %}
+                    <a href="/totp/{{ e.id }}" class="link">Enable TOTP</a>
+                {% endif %}
+            </div>
+        </div>
+        {% else %}
+        <p class="text-zinc-500">No passwords yet</p>
+        {% endfor %}
+    </div>
+
+    <h2 class="text-lg font-semibold mt-10 mb-3">Secure Notes</h2>
+    <div class="space-y-3">
+        {% for n in notes %}
+        <div
+            class="note bg-[#161616] border border-[#262626] p-4 rounded flex justify-between items-center"
+            data-title="{{ n.title | lower }}"
+            data-tags="{{ ' '.join(n.tags) | lower }}"
+        >
+            <div>
+                <div class="font-semibold">{{ n.title }}</div>
+                {% if n.tags %}
+                <div class="text-sm text-zinc-500">
+                    {{ ", ".join(n.tags) }}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="flex gap-2">
+                <a href="/edit-note/{{ n.id }}" class="link">Edit</a>
+                <form method="post" action="/delete-note/{{ n.id }}">
+                    <button class="danger">Delete</button>
+                </form>
+            </div>
+        </div>
+        {% else %}
+        <p class="text-zinc-500">No notes yet</p>
+        {% endfor %}
+    </div>
+
+    <p id="copy-status" class="text-emerald-500 mt-4"></p>
+
+</div>
+
+<script src="/static/app.js"></script>
+
+
+
+<style>
+    .btn {
+        background: #ffffff;
+        color: #000000;
+        padding: 0.5rem 1rem;
+        border-radius: 0.3rem;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+    }
+
+    .btn-sm {
+        background: #1a1a1a;
+        color: #ffffff;
+        border: 1px solid #333333;
+        padding: 0.4rem 0.7rem;
+        border-radius: 0.3rem;
+        font-size: 0.875rem;
+        cursor: pointer;
+    }
+
+    .danger {
+        background: #2a0a0a;
+        color: #ff5555;
+        border: 1px solid #451a1a;
+        padding: 0.4rem 0.7rem;
+        border-radius: 0.3rem;
+        cursor: pointer;
+    }
+
+    .link {
+        color: #777777;
+        font-size: 0.875rem;
+        text-decoration: none;
+    }
+
+</style>
+
+</body>
+</html>

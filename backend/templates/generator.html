@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#0a0a0a] text-zinc-100 min-h-screen">
+<div class="max-w-md mx-auto p-6">
+
+    <h1 class="text-2xl font-bold mb-6">Password generator</h1>
+
+    <div class="mb-4">
+        <label class="label">Length</label>
+        <input
+            id="len"
+            type="number"
+            min="8"
+            max="64"
+            value="16"
+            class="input"
+        >
+    </div>
+
+    <div class="space-y-2 mb-6 text-sm">
+        <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="upper" class="accent-zinc-500 w-4 h-4">
+            Uppercase (A-Z)
+        </label>
+
+        <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="lower" class="accent-zinc-500 w-4 h-4">
+            Lowercase (a-z)
+        </label>
+
+        <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="digits" class="accent-zinc-500 w-4 h-4">
+            Digits (0-9)
+        </label>
+
+        <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="symbols" class="accent-zinc-500 w-4 h-4">
+            Symbols (!@#$)
+        </label>
+    </div>
+
+    <button onclick="generate()" class="btn w-full mb-6">
+        Generate Password
+    </button>
+
+    <div class="mb-4">
+        <label class="label">Generated Password</label>
+        <input
+            id="result"
+            readonly
+            class="input font-mono"
+        >
+    </div>
+
+    <div class="flex gap-3">
+        <button onclick="copyGenerated()" class="btn-sm flex-1">
+            Copy
+        </button>
+
+        <button onclick="useGenerated()" class="btn-sm flex-1">
+            use in Add Password
+        </button>
+    </div>
+
+    <p id="gen-status" class="text-emerald-500 text-sm mt-4"></p>
+
+    <a href="/dashboard" class="link mt-6 inline-block">
+        Back to Dahsboard
+    </a>
+
+</div>
+
+<script src="/static/app.js"></script>
+
+<style>
+    .input {
+        width: 100%;
+        padding: 0.6rem;
+        border-radius: 0.3rem;
+        background: #121212;
+        border: 1px solid #282828;
+        color: #ffffff;
+        outline: none;
+    }
+
+    .label {
+        display: block;
+        margin-bottom: 0.25rem;
+        font-size: 0.875rem;
+        color: #a0a0a0;
+    }
+
+    .btn {
+        background: #ffffff;
+        color: #000000;
+        padding: 0.6rem;
+        border-radius: 0.3rem;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+    }
+
+    .link {
+        color: #777777;
+        font-size: 0.875rem;
+        text-decoration: none;
+    }
+</style>
+
+</body>
+</html>

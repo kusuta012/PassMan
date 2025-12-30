@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Entry</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#0a0a0a] text-zinc-100 min-h-screen">
+<div class="max-w-md mx-auto p-6">
+    <h1 class="text-2xl font-bold mb-6">edit Password Eentry</h1>
+
+    <form method="post" class="space-y-4">
+
+        <div>
+            <label class="label">Site</label>
+            <input name="site" value="{{ entry.site }}" class="input">
+        </div>
+
+        <div>
+            <label class="label">Username</label>
+            <input name="username" value="{{ entry.username }}" class="input">
+        </div>
+
+        <div>
+            <label class="label">Tags</label>
+            <input
+                name="tags"
+                value="{{ ', '.join(entry.tags) }}"
+                class="input"
+            >
+        </div>
+
+        <button class="btn w-full">
+            Save Details
+        </button>
+    </form>
+
+    <hr class="my-8 border-[#262626]">
+
+    <h2 class="text-lg font-semibold mb-3">Change Password</h2>
+
+    <form method="post" action="/change-password/{{ entry.id }}" class="space-y-4">
+
+        <div>
+            <label class="label">New Password</label>
+            <input
+                type="password"
+                name="new_password"
+                required
+                class="input"
+            >
+        </div>
+
+        <button class="btn w-full">
+            Update Password
+        </button>
+    </form>
+
+    <a href="/dashboard" class="link mt-6 inline-block">
+        Back to Dashboard
+    </a>
+
+</div>
+
+<style>
+    .input {
+        width: 100%;
+        padding: 0.6rem;
+        border-radius: 0.25rem;
+        background: #121212;
+        border: 1px solid #2a2a2a;
+        color: #ffffff;
+        outline: none;
+    }
+
+    .label {
+        display: block;
+        margin-bottom: 0.25rem;
+        font-size: 0.875rem;
+        color: #888888;
+    }
+
+    .btn {
+        background: #ffffff;
+        color: #000000;
+        padding: 0.6rem;
+        border-radius: 0.25rem;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+    }
+
+    .link {
+        color: #777777;
+        font-size: 0.875rem;
+        text-decoration: none;
+    }
+</style>
+</body>
+</html>

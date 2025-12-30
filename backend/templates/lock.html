@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lock</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#0a0a0a] text-zinc-100 min-h-screen flex items-center justify-center">
+<div class="max-w-sm w-full mx-auto p-8 bg-[#161616] border border-[#262626] rounded-lg shadow-xl">
+    
+    <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold mb-2">PassMan</h1>
+    </div>
+
+    {% if error %}
+        <div class="bg-[#1a0a0a] text-red-400 border border-[#451a1a] p-3 rounded mb-4 text-sm text-center">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <form method="post" class="space-y-6">
+        <div>
+            <label class="label">master Password</label>
+            <input 
+                type="password" 
+                name="master" 
+                placeholder="Enter master password" 
+                required 
+                class="input"
+                autofocus
+            >
+        </div>
+
+        <button type="submit" class="btn w-full">
+            Unlock Vault
+        </button>
+    </form>
+
+</div>
+
+<style>
+    .input {
+        width: 100%;
+        padding: 0.6rem;
+        border-radius: 0.3rem;
+        background: #121212;
+        border: 1px solid #282828;
+        color: #ffffff;
+        outline: none;
+    }
+
+    .label {
+        display: block;
+        margin-bottom: 0.25rem;
+        font-size: 0.875rem;
+        color: #a0a0a0;
+    }
+
+    .btn {
+        background: #ffffff;
+        color: #000000;
+        padding: 0.6rem;
+        border-radius: 0.3rem;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+    }
+
+    .link {
+        color: #777777;
+        font-size: 0.875rem;
+        text-decoration: none;
+    }
+</style>
+
+</body>
+</html>

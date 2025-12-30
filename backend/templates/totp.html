@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enable TOTP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#0a0a0a] text-zinc-100 min-h-screen">
+<div class="max-w-md mx-auto p-6">
+    <h2 class="text-2xl font-bold mb-4">Enable TOTP</h2>
+
+    <div class="bg-[#161616] border border-[#262626] p-4 rounded mb-6">
+        <div class="font-semibold">{{ entry.site }}</div>
+        <div class="text-sm text-zinc-500">{{ entry.username }}</div>
+    </div>
+
+    <div class="text-sm text-zinc-500 mb-4">
+        Please enter the TOTP secret generted by your authenticator app
+        it will show the live codes on your entry in the dashboard
+    </div>
+
+    <form method="post" class="space-y-4">
+
+        <div>
+            <label class="label">TOTP Secret</label>
+            <input
+                name="secret"
+                required
+                class="input font-mono"
+            >
+        </div>
+
+        <button type="submit" class="btn w-full">
+            Enable TOTP
+        </button>
+    </form>
+
+    <a href="/dashboard" class="link mt-6 inline-block">
+        Back to Dashboard
+    </a>
+
+</div>
+<style>
+    .input {
+        width: 100%;
+        padding: 0.6rem;
+        border-radius: 0.3rem;
+        background: #121212;
+        border: 1px solid #282828;
+        color: #ffffff;
+        outline: none;
+    }
+
+    .label {
+        display: block;
+        margin-bottom: 0.25rem;
+        font-size: 0.875rem;
+        color: #a0a0a0;
+    }
+
+    .btn {
+        background: #ffffff;
+        color: #000000;
+        padding: 0.6rem;
+        border-radius: 0.3rem;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+    }
+
+    .link {
+        color: #777777;
+        font-size: 0.875rem;
+        text-decoration: none;
+    }
+</style>
+
+</body>
+</html>
